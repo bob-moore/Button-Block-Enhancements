@@ -84,5 +84,4 @@ class Editor extends Admin
 
 		return $valid_families;
 	}
-
 }

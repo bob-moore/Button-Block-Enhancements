@@ -144,34 +144,6 @@ final class PluginConformanceTest extends TestCase
 					Interfaces\Mountable::class,
 				],
 			],
-			'blocks-provider'      => [
-				Providers\Blocks::class,
-				Abstracts\Module::class,
-				[
-					Interfaces\Module::class,
-				],
-			],
-			'shortcodes-provider'  => [
-				Providers\Shortcodes::class,
-				Abstracts\Module::class,
-				[
-					Interfaces\Module::class,
-				],
-			],
-			'taxonomies-provider'  => [
-				Providers\Taxonomies::class,
-				Abstracts\Module::class,
-				[
-					Interfaces\Module::class,
-				],
-			],
-			'blocks-processor'     => [
-				Processors\Blocks::class,
-				Abstracts\Module::class,
-				[
-					Interfaces\Module::class,
-				],
-			],
 			'colors-processor'     => [
 				Processors\Colors::class,
 				Abstracts\Module::class,

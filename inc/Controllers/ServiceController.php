@@ -17,11 +17,7 @@
 
 namespace Bmd\ButtonBlockEnhancements\Controllers;
 
-use Bmd\WPFramework\Services\ServiceLocator;
 use Bmd\WPFramework;
-use Bmd\GithubWpUpdater;
-
-use DI\Attribute\Inject;
 
 /**
  * Service Controller Class
@@ -48,5 +44,5 @@ class ServiceController extends WPFramework\Controllers\ServiceController
 			parent::getServiceDefinitions(),
 			[]
 		);
-	}	
+	}
 }
