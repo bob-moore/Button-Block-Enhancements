@@ -16,6 +16,7 @@ package.json         export-ignore
 plugin.code-workspace export-ignore
 postcss.config.js    export-ignore
 scoper.custom.php    export-ignore
+_playground/         export-ignore
 scripts/             export-ignore
 src/                 export-ignore
 stylelint.config.js  export-ignore

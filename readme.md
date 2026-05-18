@@ -15,10 +15,6 @@ Want to give it a test drive? Try it in the WP Playground: [![Try it in the Word
 
 Add icons and hover/focus colors to the WordPress Button block (`core/button`) in both the editor and frontend.
 
-## Successor Notice
-
-This plugin supersedes [Enable Button Icons](https://github.com/bob-moore/enable-button-icons). All icon functionality has been migrated here and extended with additional enhancements. New development will happen in this repository.
-
 ## Features
 
 ### Icons
@@ -71,14 +67,14 @@ composer require bmd/button-block-enhancements
 Then bootstrap:
 
 ```php
-use Bmd\ButtonBlockEnhancements\Main;
+use Bmd\ButtonBlockEnhancements\Main as ButtonBlockEnhancements;
 
 $dependency_url  = plugin_dir_url( __FILE__ ) . 'vendor/bmd/button-block-enhancements/';
 $dependency_path = plugin_dir_path( __FILE__ ) . 'vendor/bmd/button-block-enhancements/';
 
-$plugin = new Main(
+$plugin = new ButtonBlockEnhancements(
     [
-        'config.package' => Main::PACKAGE,
+        'config.package' => 'your_plugin_name',
         'config.dir'     => $dependency_path,
         'config.url'     => $dependency_url,
     ]
