@@ -133,7 +133,7 @@ add_filter( 'button_block_enhancements_icon_families', function ( $families ) {
 
 ## Updates
 
-This plugin is distributed through GitHub releases (not WordPress.org). The plugin includes a scoped GitHub updater so WordPress can detect and apply new versions from this repository.
+This plugin is distributed through GitHub releases (not WordPress.org). The plugin includes a scoped GitHub updater so WordPress can detect and apply new versions from this repository. See [Github Plugin Updater](https://github.com/bob-moore/github-plugin-updater) for details.
 
 ## Changelog
 
