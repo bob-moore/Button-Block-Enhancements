@@ -11,7 +11,7 @@
 [![PHPStan](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpstan.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpstan.yml)
 [![PHPUnit](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpunit.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpunit.yml)
 
-Want to give it a test drive? Try it in the WP Playground: [![Try it in the WordPress Playground](https://img.shields.io/badge/WP_Playground-v4.0.1-blue?logo=wordpress&logoColor=%23fff&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bob-moore/button-block-enhancements/main/_playground/blueprint-github.json)
+Want to give it a test drive? Try it in the WP Playground: [![Try it in the WordPress Playground](https://img.shields.io/badge/WP_Playground-v1.1.1-blue?logo=wordpress&logoColor=%23fff&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bob-moore/button-block-enhancements/main/_playground/blueprint-github.json)
 
 Add icons and hover/focus colors to the WordPress Button block (`core/button`) in both the editor and frontend.
 
@@ -40,7 +40,8 @@ Add icons and hover/focus colors to the WordPress Button block (`core/button`) i
 
 ### Architecture
 
-- Uses a small PHP-DI service container for plugin services.
+- Boots through a single `Controller` that builds a small PHP-DI container and mounts all WordPress hooks.
+- Splits responsibilities into focused providers (`Assets`, `Icons`), processors (`Colors`, `Icons`), and resolver services for file paths and URLs.
 - Scopes bundled runtime dependencies in release zips to avoid conflicts with other plugins.
 - Ships release zips with a compiled container cache, while Composer installs exclude `cache/` so host projects can decide whether to compile their own container.
 - Can be embedded in other plugins or themes via Composer.
@@ -69,12 +70,13 @@ composer require bmd/button-block-enhancements
 Then bootstrap:
 
 ```php
-use Bmd\ButtonBlockEnhancements\Controller as ButtonBlockEnhancements;
+use Bmd\ButtonBlockEnhancements\Controller;
 
 $dependency_url  = plugin_dir_url( __FILE__ ) . 'vendor/bmd/button-block-enhancements/';
 $dependency_path = plugin_dir_path( __FILE__ ) . 'vendor/bmd/button-block-enhancements/';
 
-$plugin = new ButtonBlockEnhancements(
+
+$plugin = new Controller(
     $dependency_url,
     $dependency_path,
     false
@@ -133,7 +135,12 @@ add_filter( 'button_block_enhancements_icon_families', function ( $families ) {
 
 ## Changelog
 
-### 4.0.1
+### 1.1.1
+
+- Documented the controller/provider/processor architecture used by the current plugin bootstrap.
+- Standardized all release metadata and package versions on 1.1.1.
+
+### 1.1.0
 
 - Rebuilt the plugin around a focused PHP-DI controller and provider/processor services.
 - Scoped release dependencies to reduce conflicts with other plugins.

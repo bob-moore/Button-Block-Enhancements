@@ -3,7 +3,7 @@ Contributors: Bob Moore
 Tags: block-editor, gutenberg, button, icons, blocks
 Requires at least: 6.9
 Tested up to: 7.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 8.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,8 @@ Add icons and hover/focus colors to the core/button block.
 Button Block Enhancements extends the core/button block with icon controls and hover/focus color controls in the block sidebar.
 
 This plugin supersedes Enable Button Icons (https://github.com/bob-moore/enable-button-icons). All icon functionality has been migrated here and extended with additional enhancements.
+
+Under the hood, the plugin now boots through a single controller that builds a PHP-DI container, then delegates responsibilities to focused asset/icon providers, render processors, and filesystem/URL resolver services.
 
 What it does:
 
@@ -58,11 +60,11 @@ This plugin is distributed through GitHub releases and includes a scoped updater
 
 3. Instantiate and mount the service:
 
-`use Bmd\ButtonBlockEnhancements\Main as ButtonBlockEnhancements;`
-`$plugin = new ButtonBlockEnhancements( [ 'config.package' => 'your_plugin_name', 'config.dir' => $dependency_path, 'config.url' => $dependency_url ] );`
+`use Bmd\ButtonBlockEnhancements\Controller;`
+`$plugin = new Controller( $dependency_url, $dependency_path, false );`
 `$plugin->mount();`
 
-The config expects the filesystem path and public URL pointing to the Button Block Enhancements dependency root, not the file where you call it.
+The constructor expects the filesystem path and public URL pointing to the Button Block Enhancements dependency root, not the file where you call it. Leave the third argument `false` for Composer-embedded usage unless your project manages the compiled container cache lifecycle.
 
 == Frequently Asked Questions ==
 
@@ -88,6 +90,11 @@ Yes. Button Block Enhancements supersedes Enable Button Icons and adds hover/foc
 
 == Changelog ==
 
+= 1.1.1 =
+
+* Standardized release metadata and package versions on 1.1.1.
+* Updated the documentation to reflect the current controller/provider/processor architecture and Composer bootstrap API.
+
 = 1.1.0 =
 
 * Moved GitHub updater dependency to scoped/bundled — no longer a transitive Composer requirement for consumers who install via Composer.
@@ -102,6 +109,10 @@ Yes. Button Block Enhancements supersedes Enable Button Icons and adds hover/foc
 * Added scoped GitHub updater.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+
+No action required. Documentation and release metadata update.
 
 = 1.1.0 =
 

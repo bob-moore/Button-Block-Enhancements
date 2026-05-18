@@ -6,7 +6,7 @@
  * Plugin Name: Button Block Enhancements
  * Plugin URI:  https://github.com/bob-moore/button-block-enhancements
  * Description: Enable hover/focus colors and icons for the core/button block.
- * Version:     1.1.0
+ * Version:     1.1.1
  * Author:      Bob Moore
  * Author URI:  https://www.bobmoore.dev
  * Requires at least: 6.9

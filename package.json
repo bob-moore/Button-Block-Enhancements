@@ -1,6 +1,6 @@
 {
 	"name": "button_block_enhancements",
-	"version": "4.0.1",
+	"version": "1.1.1",
 	"description": "dd hover/focus colors and icon support to the core/button block",
 	"author": "Bob Moore <bob@bobmoore.dev>",
 	"license": "GPL-2.0-or-later",
