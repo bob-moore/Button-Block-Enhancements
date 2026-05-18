@@ -7,9 +7,9 @@
 [![Latest Release](https://img.shields.io/github/v/release/bob-moore/button-block-enhancements?label=release)](https://github.com/bob-moore/button-block-enhancements/releases/latest)
 [![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)](https://www.gnu.org/licenses/gpl-2.0.html)
 
-[![Lint CSS](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-css.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-css.yml)
-[![Lint JS](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-js.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-js.yml)
-[![Lint PHP](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-php.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-php.yml)
+[![Lint PHP](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpcs.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpcs.yml)
+[![PHPStan](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpstan.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpstan.yml)
+[![PHPUnit](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpunit.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpunit.yml)
 
 Want to give it a test drive? Try it in the WP Playground: [![Try it in the WordPress Playground](https://img.shields.io/badge/WP_Playground-v1.0.0-blue?logo=wordpress&logoColor=%23fff&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bob-moore/button-block-enhancements/main/_playground/blueprint-github.json)
 
