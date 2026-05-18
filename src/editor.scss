@@ -1,0 +1,102 @@
+.button-block-enhancements-control-wrapper {
+
+	.components-base-control {
+		width: 100%;
+	}
+
+	.components-toggle-group-control {
+
+		&::before {
+			background-color: #000;
+		}
+
+		button.is-selected {
+			color: #fff !important;
+		}
+	}
+
+	&.unit-range-wrapper {
+		align-items: normal;
+		flex-direction: column;
+
+		.components-base-control__field,
+		.components-base-control {
+			margin: 0;
+		}
+
+		.components-base-control__label {
+			font-size: 11px;
+			font-weight: 500;
+			line-height: 1.4;
+			text-transform: uppercase;
+			display: block;
+			margin-bottom: 8px;
+			padding: 0;
+		}
+
+		.unit-range-wrapper__controls {
+			display: grid;
+			grid-template-columns: 80px 1fr;
+			gap: 16px;
+		}
+	}
+}
+
+.wp-block-button[class*="has-icon__"] {
+
+	.wp-block-button__link {
+
+		&::after {
+			content: "";
+			display: inline-block;
+			background-color: currentcolor;
+			mask-size: 100%;
+			mask-position: center;
+			mask-repeat: no-repeat;
+			height: var(--bmd-button-icon-size, 1em);
+			width: var(--bmd-button-icon-size, 1em);
+			vertical-align: middle;
+			mask-image: var(--bmd-button-icon);
+			margin-inline-start: var(--bmd-button-icon-gap, 0.75em);
+			scale: 1.25;
+		}
+	}
+
+	&.has-icon-position__left {
+
+		.wp-block-button__link {
+
+			&::after {
+				content: none;
+			}
+
+			&::before {
+				content: "";
+				display: inline-block;
+				background-color: currentcolor;
+				mask-size: 100%;
+				mask-position: center;
+				mask-repeat: no-repeat;
+				height: var(--bmd-button-icon-size, 1em);
+				width: var(--bmd-button-icon-size, 1em);
+				vertical-align: middle;
+				mask-image: var(--bmd-button-icon);
+				margin-inline-end: var(--bmd-button-icon-gap, 0.75em);
+				scale: 1.25;
+			}
+		}
+	}
+}
+
+.wp-block-button.has-bmd-focus-color .wp-block-button__link:hover,
+.wp-block-button.has-bmd-focus-color .wp-block-button__link:focus,
+.wp-block-button.has-bmd-focus-color .wp-block-button__link:focus-visible {
+	color: var(--bmd-button-focus-color) !important;
+}
+
+.wp-block-button.has-bmd-focus-background-color .wp-block-button__link:hover,
+.wp-block-button.has-bmd-focus-background-color .wp-block-button__link:focus,
+.wp-block-button.has-bmd-focus-background-color
+	.wp-block-button__link:focus-visible {
+	background-color: var(--bmd-button-focus-background-color) !important;
+}
