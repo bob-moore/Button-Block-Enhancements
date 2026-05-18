@@ -3,7 +3,7 @@ Contributors: Bob Moore
 Tags: block-editor, gutenberg, button, icons, blocks
 Requires at least: 6.9
 Tested up to: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires PHP: 8.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -88,6 +88,10 @@ Yes. Button Block Enhancements supersedes Enable Button Icons and adds hover/foc
 
 == Changelog ==
 
+= 1.1.0 =
+
+* Moved GitHub updater dependency to scoped/bundled — no longer a transitive Composer requirement for consumers who install via Composer.
+
 = 1.0.0 =
 
 * Initial release.
@@ -98,6 +102,10 @@ Yes. Button Block Enhancements supersedes Enable Button Icons and adds hover/foc
 * Added scoped GitHub updater.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+
+No action required. Internal dependency packaging change only.
 
 = 1.0.0 =
 

@@ -2,26 +2,18 @@
 /**
  * Button color processor.
  *
- * PHP Version 8.2
- *
- * @package    Bmd_ButtonBlockEnhancements
- * @subpackage Processors
- * @author     Bob Moore <bob@bobmoore.dev>
- * @license    GPL-2.0+ <http://www.gnu.org/licenses/gpl-2.0.txt>
- * @link       https://github.com/bob-moore/button-block-enhancements
- * @since      1.0.0
+ * @package Bmd\ButtonBlockEnhancements
+ * @author  Bob Moore <bob@bobmoore.dev>
+ * @license GPL-2.0-or-later https://www.gnu.org/licenses/gpl-2.0.html
+ * @link    https://github.com/bob-moore/button-block-enhancements
  */
 
 namespace Bmd\ButtonBlockEnhancements\Processors;
 
-use Bmd\WPFramework\Abstracts;
-
 /**
  * Adds focus and hover color custom properties to core/button markup.
- *
- * @subpackage Processors
  */
-class Colors extends Abstracts\Module
+class Colors
 {
 	/**
 	 * Add frontend focus/hover color variables to the core/button wrapper.
@@ -31,7 +23,7 @@ class Colors extends Abstracts\Module
 	 *
 	 * @return string
 	 */
-	public function processButtonFocusColors( string $block_content, array $block ): string
+	public function renderBlock( string $block_content, array $block ): string
 	{
 		$focus_color            = $block['attrs']['bmdFocusColor'] ?? '';
 		$focus_background_color = $block['attrs']['bmdFocusBackgroundColor'] ?? '';

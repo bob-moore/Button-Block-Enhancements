@@ -55,6 +55,6 @@ composer.lock
 composer-deps.json
 composer-deps.lock
 package-lock.json
-
+cache/
 *-lock.json
 *.lock

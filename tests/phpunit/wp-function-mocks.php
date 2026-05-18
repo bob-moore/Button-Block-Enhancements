@@ -21,6 +21,12 @@ if ( ! function_exists( 'is_admin' ) ) {
 	}
 }
 
+if ( ! function_exists( 'esc_url_raw' ) ) {
+	function esc_url_raw( $url ) {
+		return $url;
+	}
+}
+
 if ( ! function_exists( 'plugin_dir_path' ) ) {
 	/**
 	 * Get the filesystem directory path (with trailing slash) for the plugin __FILE__ passed in.

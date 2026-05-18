@@ -1,20 +1,12 @@
 <?php
 /**
- * Plugin bootstrap file
- *
- * PHP Version 8.2
- *
- * @package Bmd_ButtonBlockEnhancements
- * @author  Bob Moore <bob@bobmoore.dev>
- * @license GPL-2.0-or-later
- * @link    https://github.com/bob-moore/button-block-enhancements
- * @since   1.0.0
+ * Plugin bootstrap.
  *
  * @wordpress-plugin
  * Plugin Name: Button Block Enhancements
  * Plugin URI:  https://github.com/bob-moore/button-block-enhancements
  * Description: Enable hover/focus colors and icons for the core/button block.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      Bob Moore
  * Author URI:  https://www.bobmoore.dev
  * Requires at least: 6.9
@@ -23,6 +15,8 @@
  * License:     GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: button_block_enhancements
+ *
+ * @package Bmd\ButtonBlockEnhancements
  */
 
 namespace Bmd\ButtonBlockEnhancements;
@@ -32,10 +26,7 @@ use Bmd\GithubWpUpdater;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Autoload dependencies and initialize the plugin.
- *
- * This function is hooked to the 'plugins_loaded' action to ensure that
- * all plugins are loaded before this plugin initializes.
+ * Load dependencies and mount the plugin after WordPress has loaded plugins.
  *
  * @return void
  */
@@ -51,18 +42,20 @@ function burn_baby_burn(): void
 			require_once $scoper_autoload;
 		}
 
+		if ( ! is_file( $composer_autoload ) ) {
+			throw new \RuntimeException( 'Button Block Enhancements dependencies are missing. Run composer install before activating the plugin.' );
+		}
+
 		require_once $composer_autoload;
 
-		$config = [
-			'config.package' => Main::PACKAGE,
-			'config.dir'     => plugin_dir_path( __FILE__ ),
-			'config.url'     => plugin_dir_url( __FILE__ ),
-		];
+		$controller = new Controller(
+			plugin_dir_url( __FILE__ ),
+			plugin_dir_path( __FILE__ ),
+			true
+		);
+		$controller->mount();
 
-		$plugin = new Main( $config );
-		$plugin->mount();
-
-	} catch ( \Error $e ) {
+	} catch ( \Throwable $e ) {
 		error_log( $e->getMessage() );
 	}
 }

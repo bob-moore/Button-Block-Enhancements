@@ -1,6 +1,6 @@
 {
     "name": "bmd/button-block-enhancements",
-    "description": "dd hover/focus colors and icon support to the core/button block",
+    "description": "Enable hover/focus colors and icon support to the core/button block",
     "type": "library",
     "license": "GPL-2.0-or-later",
     "minimum-stability": "dev",
@@ -29,10 +29,10 @@
         }
     },
     "require": {
-        "bmd/wp-framework": "*",
-        "bmd/github-wp-updater": "^0.1.2"
+        "php-di\/php-di": "^7.1"
     },
     "require-dev": {
+        "bmd/github-wp-updater": "^0.1.2",
         "squizlabs/php_codesniffer": "^3.7",
         "phpunit/phpunit": "^9.6",
         "symfony/var-dumper": "*",
@@ -45,7 +45,6 @@
     },
     "scripts": {
         "build-release": "node scripts/build-plugin-release.mjs",
-        "create-plugin": "@php scripts/create-plugin.php",
         "phpstan": "./vendor/bin/phpstan analyze -c ./tests/phpstan.neon --memory-limit=2048M",
         "phpsniff": "./vendor/bin/phpcs ./inc -v --standard='./tests/phpcs.xml'",
         "phpsniff:fix": "./vendor/bin/phpcbf ./inc -v --standard='./tests/phpcs.xml'",
@@ -80,9 +79,8 @@
             ],
             "autorun": false,
             "source-namespace-patches": [
-                "Bmd\\WPFramework",
-                "Bmd\\GithubWpUpdater",
-                "DI\\"
+                "DI\\",
+                "Psr\\Container\\"
             ]
         }
     }

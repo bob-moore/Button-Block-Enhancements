@@ -40,21 +40,12 @@ const plugins = scriptConfig.plugins.filter( ( item ) => {
 const assetConfig = {
 	...scriptConfig,
 	entry: {
-		frontend: [
-			path.resolve( __dirname, 'src', 'frontend.ts' ),
-			path.resolve( __dirname, 'src', 'frontend.scss' ),
-		],
-		admin: [
-			path.resolve( __dirname, 'src', 'admin.ts' ),
-			path.resolve( __dirname, 'src', 'admin.scss' ),
-		],
 		editor: [
 			path.resolve( __dirname, 'src', 'editor.tsx' ),
 			path.resolve( __dirname, 'src', 'editor.scss' ),
 		],
-		login: [
-			path.resolve( __dirname, 'src', 'login.ts' ),
-			path.resolve( __dirname, 'src', 'login.scss' ),
+		styles: [
+			path.resolve( __dirname, 'src', 'styles.scss' ),
 		],
 	},
 	output: {

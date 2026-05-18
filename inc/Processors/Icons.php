@@ -2,26 +2,18 @@
 /**
  * Button icon processor.
  *
- * PHP Version 8.2
- *
- * @package    Bmd_ButtonBlockEnhancements
- * @subpackage Processors
- * @author     Bob Moore <bob@bobmoore.dev>
- * @license    GPL-2.0+ <http://www.gnu.org/licenses/gpl-2.0.txt>
- * @link       https://github.com/bob-moore/button-block-enhancements
- * @since      1.0.0
+ * @package Bmd\ButtonBlockEnhancements
+ * @author  Bob Moore <bob@bobmoore.dev>
+ * @license GPL-2.0-or-later https://www.gnu.org/licenses/gpl-2.0.html
+ * @link    https://github.com/bob-moore/button-block-enhancements
  */
 
 namespace Bmd\ButtonBlockEnhancements\Processors;
 
-use Bmd\WPFramework\Abstracts;
-
 /**
  * Adds stored button icons to core/button frontend markup.
- *
- * @subpackage Processors
  */
-class Icons extends Abstracts\Module
+class Icons
 {
 	/**
 	 * Allowed SVG tags and attributes for stored icons.
@@ -99,7 +91,7 @@ class Icons extends Abstracts\Module
 	 *
 	 * @return string Filtered block markup.
 	 */
-	public function renderIcon( string $block_content, array $block ): string
+	public function renderBlock( string $block_content, array $block ): string
 	{
 		$icon = $block['attrs']['icon'] ?? null;
 

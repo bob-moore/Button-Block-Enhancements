@@ -1,40 +1,30 @@
 <?php
 /**
- * Icons Provider
+ * Icon family provider.
  *
- * PHP Version 8.2
- *
- * @package    Bmd_ButtonBlockEnhancements
- * @subpackage Providers
- * @author     Bob Moore <bob@bobmoore.dev>
- * @license    GPL-2.0+ <http://www.gnu.org/licenses/gpl-2.0.txt>
- * @link       https://github.com/bob-moore/button-block-enhancements
- * @since      1.0.0
+ * @package Bmd\ButtonBlockEnhancements
+ * @author  Bob Moore <bob@bobmoore.dev>
+ * @license GPL-2.0-or-later https://www.gnu.org/licenses/gpl-2.0.html
+ * @link    https://github.com/bob-moore/button-block-enhancements
  */
 
 namespace Bmd\ButtonBlockEnhancements\Providers;
 
-use Bmd\WPFramework\Abstracts;
-use Bmd\WPFramework\Services\UrlResolver;
+use Bmd\ButtonBlockEnhancements\Services;
 
 /**
  * Provides built-in icon families via the icon families filter.
- *
- * @subpackage Providers
  */
-class Icons extends Abstracts\Module
+class Icons
 {
 	/**
-	 * Public constructor
+	 * Constructor.
 	 *
-	 * @param UrlResolver $url_resolver : url resolver service instance.
-	 * @param string      $package      : package name, optional.
+	 * @param Services\UrlResolver $url_resolver URL resolver.
 	 */
 	public function __construct(
-		protected UrlResolver $url_resolver,
-		string $package = ''
+		protected Services\UrlResolver $url_resolver
 	) {
-		parent::__construct( $package );
 	}
 
 	/**

@@ -13,6 +13,6 @@
 		"resolveJsonModule": true,
 		"lib": [ "dom", "es2015", "scripthost" ]
 	},
-	"include": [ "src/**/*", "declerations.d.ts" ],
+	"include": [ "src/**/*", "declarations.d.ts" ],
 	"exclude": [ "build", "node_modules", "vendor" ]
 }

@@ -11,7 +11,7 @@
 [![PHPStan](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpstan.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpstan.yml)
 [![PHPUnit](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpunit.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpunit.yml)
 
-Want to give it a test drive? Try it in the WP Playground: [![Try it in the WordPress Playground](https://img.shields.io/badge/WP_Playground-v1.0.0-blue?logo=wordpress&logoColor=%23fff&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bob-moore/button-block-enhancements/main/_playground/blueprint-github.json)
+Want to give it a test drive? Try it in the WP Playground: [![Try it in the WordPress Playground](https://img.shields.io/badge/WP_Playground-v4.0.1-blue?logo=wordpress&logoColor=%23fff&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bob-moore/button-block-enhancements/main/_playground/blueprint-github.json)
 
 Add icons and hover/focus colors to the WordPress Button block (`core/button`) in both the editor and frontend.
 
@@ -38,9 +38,11 @@ Add icons and hover/focus colors to the WordPress Button block (`core/button`) i
 - Previews live in the editor.
 - Outputs CSS custom properties (`--bmd-button-focus-color`, `--bmd-button-focus-background-color`) on the button wrapper so themes can override or extend behavior.
 
-### General
+### Architecture
 
-- Ships with GitHub-based plugin updates in the WordPress admin update UI.
+- Uses a small PHP-DI service container for plugin services.
+- Scopes bundled runtime dependencies in release zips to avoid conflicts with other plugins.
+- Ships release zips with a compiled container cache, while Composer installs exclude `cache/` so host projects can decide whether to compile their own container.
 - Can be embedded in other plugins or themes via Composer.
 
 ## Requirements
@@ -67,23 +69,21 @@ composer require bmd/button-block-enhancements
 Then bootstrap:
 
 ```php
-use Bmd\ButtonBlockEnhancements\Main as ButtonBlockEnhancements;
+use Bmd\ButtonBlockEnhancements\Controller as ButtonBlockEnhancements;
 
 $dependency_url  = plugin_dir_url( __FILE__ ) . 'vendor/bmd/button-block-enhancements/';
 $dependency_path = plugin_dir_path( __FILE__ ) . 'vendor/bmd/button-block-enhancements/';
 
 $plugin = new ButtonBlockEnhancements(
-    [
-        'config.package' => 'your_plugin_name',
-        'config.dir'     => $dependency_path,
-        'config.url'     => $dependency_url,
-    ]
+    $dependency_url,
+    $dependency_path,
+    false
 );
 
 $plugin->mount();
 ```
 
-The config expects the filesystem path and public URL pointing to the Button Block Enhancements dependency root, not the file where you call it.
+The constructor expects the public URL and filesystem path pointing to the Button Block Enhancements dependency root, not the file where you call it. The third argument enables PHP-DI container compilation; leave it `false` for Composer-embedded usage unless your project manages its own cache lifecycle.
 
 ## Usage
 
@@ -131,17 +131,14 @@ add_filter( 'button_block_enhancements_icon_families', function ( $families ) {
 } );
 ```
 
-## Updates
-
-This plugin is distributed through GitHub releases (not WordPress.org). The plugin includes a scoped GitHub updater so WordPress can detect and apply new versions from this repository. See [Github Plugin Updater](https://github.com/bob-moore/github-plugin-updater) for details.
-
 ## Changelog
 
-### 1.0.0
+### 4.0.1
 
-- Initial release.
+- Rebuilt the plugin around a focused PHP-DI controller and provider/processor services.
+- Scoped release dependencies to reduce conflicts with other plugins.
+- Split editor-only styles from block styles registered against `core/button`.
+- Added optional compiled container cache handling for release builds.
+- Removed the legacy framework/updater architecture.
 - Migrated button icon functionality from [Enable Button Icons](https://github.com/bob-moore/enable-button-icons).
-- Added hover/focus color controls (text and background) to the Button block Color panel.
-- Added CSS custom properties for icon gap, icon size, and focus colors.
-- Rebuilt on service-based plugin architecture (bmd/wp-framework).
-- Added scoped GitHub updater.
+- Added hover/focus color controls and CSS custom properties for icon gap, icon size, and focus colors.
