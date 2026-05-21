@@ -10,20 +10,21 @@
 
 namespace Bmd\ButtonBlockEnhancements\Providers;
 
-use Bmd\ButtonBlockEnhancements\Services;
+use Bmd\ButtonBlockEnhancements\Module;
+use Bmd\ButtonBlockEnhancements\Services\UrlResolver;
 
 /**
  * Provides built-in icon families via the icon families filter.
  */
-class Icons
+class Icons extends Module
 {
 	/**
 	 * Constructor.
 	 *
-	 * @param Services\UrlResolver $url_resolver URL resolver.
+	 * @param UrlResolver $url_resolver URL resolver.
 	 */
 	public function __construct(
-		protected Services\UrlResolver $url_resolver
+		protected UrlResolver $url_resolver
 	) {
 	}
 

@@ -10,22 +10,23 @@
 
 namespace Bmd\ButtonBlockEnhancements\Providers;
 
+use Bmd\ButtonBlockEnhancements\Module;
 use Bmd\ButtonBlockEnhancements\Services;
 
 /**
  * Enqueues editor controls and shared block styles.
  */
-class Assets
+class Assets extends Module
 {
 	/**
 	 * Constructor.
 	 *
-	 * @param Services\UrlResolver      $url_resolver       URL resolver.
-	 * @param Services\FilePathResolver $file_path_resolver File path resolver.
+	 * @param Services\ScriptLoader $script_loader Script loader service.
+	 * @param Services\StyleLoader  $style_loader  Style loader service.
 	 */
 	public function __construct(
-		protected Services\UrlResolver $url_resolver,
-		protected Services\FilePathResolver $file_path_resolver
+		protected Services\ScriptLoader $script_loader,
+		protected Services\StyleLoader $style_loader,
 	) {
 	}
 
@@ -36,85 +37,38 @@ class Assets
 	 */
 	public function enqueueEditorAssets(): void
 	{
-
-		$asset_data = $this->getAssetData( 'editor' );
-
-		wp_enqueue_script(
-			handle: 'button-block-enhancements-editor',
-			src: $this->url_resolver->resolve( 'build/editor.js' ),
-			deps: $asset_data['dependencies'],
-			ver: $asset_data['version']
+		$this->script_loader->enqueue(
+			handle: "{$this->package}-editor",
+			src: 'build/editor.js'
 		);
 
 		wp_add_inline_script(
-			str_replace( '_', '-', 'button-block-enhancements-editor' ),
+			"{$this->package}-editor",
 			'window.buttonBlockEnhancements = ' . wp_json_encode(
 				[
-					'iconFamilies' => apply_filters( 'button_block_enhancements_icon_families', [] ),
+					'iconFamilies' => apply_filters( "{$this->package}_icon_families", [] ),
 				]
 			) . ';',
 			'before'
 		);
 
-		wp_enqueue_style(
-			handle: 'enable-button-icons-editor-styles',
-			src: $this->url_resolver->resolve( 'build/editor.css' ),
-			deps: [],
-			ver: $asset_data['version']
+		$this->style_loader->enqueue(
+			handle: "{$this->package}-editor-styles",
+			src: 'build/editor.css'
 		);
 	}
 
 	/**
-	 * Register block styles for the core Button block.
+	 * Register a block-specific stylesheet for the core Button block.
 	 *
 	 * @return void
 	 */
 	public function enqueueBlockStyles(): void
 	{
-		wp_enqueue_block_style(
-			'core/button',
-			[
-				'handle' => 'button-block-enhancements-styles',
-				'src'    => $this->url_resolver->resolve( 'build/styles.css' ),
-				'ver'    => '1.0.0',
-				'path'   => $this->file_path_resolver->resolve( 'build/styles.css' ),
-			]
+		$this->style_loader->enqueueBlockStyle(
+			block_name: 'core/button',
+			handle: "{$this->package}-styles",
+			src: 'build/styles.css',
 		);
-	}
-
-	/**
-	 * Resolve script dependency metadata from WordPress build asset files.
-	 *
-	 * @param string $key Build asset key without the `.asset.php` suffix.
-	 *
-	 * @return array{dependencies: array<int, string>, version: string|null}
-	 */
-	protected function getAssetData( string $key ): array
-	{
-		$asset_file = $this->file_path_resolver->resolve( "build/{$key}.asset.php" );
-
-		if ( ! is_file( $asset_file ) ) {
-			return [
-				'dependencies' => [],
-				'version'      => null,
-			];
-		}
-
-		$data = include $asset_file;
-
-		if ( ! is_array( $data ) ) {
-			return [
-				'dependencies' => [],
-				'version'      => null,
-			];
-		}
-
-		$dependencies = $data['dependencies'] ?? [];
-		$version      = $data['version'] ?? null;
-
-		return [
-			'dependencies' => is_array( $dependencies ) ? $dependencies : [],
-			'version'      => is_string( $version ) ? $version : null,
-		];
 	}
 }

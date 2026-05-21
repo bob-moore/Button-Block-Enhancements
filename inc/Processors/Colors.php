@@ -10,10 +10,12 @@
 
 namespace Bmd\ButtonBlockEnhancements\Processors;
 
+use Bmd\ButtonBlockEnhancements\Module;
+
 /**
  * Adds focus and hover color custom properties to core/button markup.
  */
-class Colors
+class Colors extends Module
 {
 	/**
 	 * Add frontend focus/hover color variables to the core/button wrapper.

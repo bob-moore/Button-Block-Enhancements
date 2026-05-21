@@ -10,10 +10,12 @@
 
 namespace Bmd\ButtonBlockEnhancements\Processors;
 
+use Bmd\ButtonBlockEnhancements\Module;
+
 /**
  * Adds stored button icons to core/button frontend markup.
  */
-class Icons
+class Icons extends Module
 {
 	/**
 	 * Allowed SVG tags and attributes for stored icons.

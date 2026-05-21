@@ -6,7 +6,7 @@
  * Plugin Name: Button Block Enhancements
  * Plugin URI:  https://github.com/bob-moore/button-block-enhancements
  * Description: Enable hover/focus colors and icons for the core/button block.
- * Version:     1.1.1
+ * Version:     1.2.0
  * Author:      Bob Moore
  * Author URI:  https://www.bobmoore.dev
  * Requires at least: 6.9
@@ -48,12 +48,15 @@ function burn_baby_burn(): void
 
 		require_once $composer_autoload;
 
-		$controller = new Controller(
-			plugin_dir_url( __FILE__ ),
-			plugin_dir_path( __FILE__ ),
-			true
+		$plugin = new Main(
+			[
+				'package' => 'button_block_enhancements',
+				'version' => '1.2.0',
+				'path'    => plugin_dir_path( __FILE__ ),
+				'url'     => plugin_dir_url( __FILE__ ),
+			]
 		);
-		$controller->mount();
+		$plugin->mount();
 
 	} catch ( \Throwable $e ) {
 		error_log( $e->getMessage() );
