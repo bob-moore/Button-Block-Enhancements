@@ -1,6 +1,6 @@
 <?php
 /**
- * Button color processor.
+ * Button color transformer.
  *
  * @package Bmd\ButtonBlockEnhancements
  * @author  Bob Moore <bob@bobmoore.dev>
@@ -8,7 +8,7 @@
  * @link    https://github.com/bob-moore/button-block-enhancements
  */
 
-namespace Bmd\ButtonBlockEnhancements\Processors;
+namespace Bmd\ButtonBlockEnhancements\Transformers;
 
 use Bmd\ButtonBlockEnhancements\Module;
 

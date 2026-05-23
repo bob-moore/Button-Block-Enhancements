@@ -20,7 +20,7 @@ return [
 	// Providers.
 	Providers\Assets::class          => \DI\autowire(),
 	Providers\Icons::class           => \DI\autowire(),
-	// Processors.
-	Processors\Icons::class          => \DI\autowire(),
-	Processors\Colors::class         => \DI\autowire(),
+	// Transformers.
+	Transformers\Icons::class        => \DI\autowire(),
+	Transformers\Colors::class       => \DI\autowire(),
 ];

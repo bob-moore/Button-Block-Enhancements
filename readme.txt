@@ -16,7 +16,7 @@ Button Block Enhancements extends the core/button block with icon controls and h
 
 This plugin supersedes Enable Button Icons (https://github.com/bob-moore/enable-button-icons). All icon functionality has been migrated here and extended with additional enhancements.
 
-Under the hood, the plugin now boots through a single controller that builds a PHP-DI container, then delegates responsibilities to focused asset/icon providers, render processors, and filesystem/URL resolver services.
+Under the hood, the plugin now boots through a single controller that builds a PHP-DI container, then delegates responsibilities to focused asset/icon providers, render transformers, and filesystem/URL resolver services.
 
 What it does:
 
@@ -98,7 +98,7 @@ Yes. Button Block Enhancements supersedes Enable Button Icons and adds hover/foc
 = 1.1.1 =
 
 * Standardized release metadata and package versions on 1.1.1.
-* Updated the documentation to reflect the current controller/provider/processor architecture and Composer bootstrap API.
+* Updated the documentation to reflect the current controller/provider/transformer architecture and Composer bootstrap API.
 
 = 1.1.0 =
 

@@ -39,16 +39,16 @@ class Controller extends Module
 	/**
 	 * Register WordPress filter hooks.
 	 *
-	 * @param Processors\Icons  $icons          Icon block processor.
-	 * @param Processors\Colors $colors         Color block processor.
-	 * @param Providers\Icons   $icon_provider  Icon family provider.
+	 * @param Transformers\Icons  $icons          Icon block transformer.
+	 * @param Transformers\Colors $colors         Color block transformer.
+	 * @param Providers\Icons     $icon_provider  Icon family provider.
 	 *
 	 * @return void
 	 */
 	#[Inject]
 	public function registerFilters(
-		Processors\Icons $icons,
-		Processors\Colors $colors,
+		Transformers\Icons $icons,
+		Transformers\Colors $colors,
 		Providers\Icons $icon_provider,
 	): void {
 		add_filter( 'render_block_core/button', [ $icons, 'renderBlock' ], 10, 2 );

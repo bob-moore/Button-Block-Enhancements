@@ -41,7 +41,7 @@ Add icons and hover/focus colors to the WordPress Button block (`core/button`) i
 ### Architecture
 
 - Boots through a single `Controller` that builds a small PHP-DI container and mounts all WordPress hooks.
-- Splits responsibilities into focused providers (`Assets`, `Icons`), processors (`Colors`, `Icons`), and resolver services for file paths and URLs.
+- Splits responsibilities into focused providers (`Assets`, `Icons`), transformers (`Colors`, `Icons`), and resolver services for file paths and URLs.
 - Scopes bundled runtime dependencies in release zips to avoid conflicts with other plugins.
 - Ships release zips with a compiled container cache, while Composer installs exclude `cache/` so host projects can decide whether to compile their own container.
 - Can be embedded in other plugins or themes via Composer.
@@ -142,12 +142,12 @@ add_filter( 'button_block_enhancements_icon_families', function ( $families ) {
 
 ### 1.1.1
 
-- Documented the controller/provider/processor architecture used by the current plugin bootstrap.
+- Documented the controller/provider/transformer architecture used by the current plugin bootstrap.
 - Standardized all release metadata and package versions on 1.1.1.
 
 ### 1.1.0
 
-- Rebuilt the plugin around a focused PHP-DI controller and provider/processor services.
+- Rebuilt the plugin around a focused PHP-DI controller and provider/transformer services.
 - Scoped release dependencies to reduce conflicts with other plugins.
 - Split editor-only styles from block styles registered against `core/button`.
 - Added optional compiled container cache handling for release builds.

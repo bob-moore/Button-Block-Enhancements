@@ -44,19 +44,9 @@ config.codekit
 # dev dependencies #
 ####################
 node_modules
-vendor
-
-# boilerplate-generated artifacts #
+.release
+.phpunit.cache
+# artifacts #
 ###################################
-.release/
-.phpunit.cache/
-tests/.phpunit.cache/
-composer.lock
-composer-deps.json
-composer-deps.lock
-package-lock.json
-cache/
-*-lock.json
-*.lock
-# release staging artifact
-button-block-enhancements/
+vendor
+cache
