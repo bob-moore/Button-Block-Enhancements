@@ -51,7 +51,7 @@ function burn_baby_burn(): void
 		$plugin = new Main(
 			[
 				'package' => 'button_block_enhancements',
-				'version' => '1.2.0',
+				'version' => '1.2.1',
 				'path'    => plugin_dir_path( __FILE__ ),
 				'url'     => plugin_dir_url( __FILE__ ),
 			]

@@ -1,6 +1,6 @@
 {
 	"name": "button_block_enhancements",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"packageManager": "npm@11.5.2",
 	"description": "dd hover/focus colors and icon support to the core/button block",
 	"author": "Bob Moore <bob@bobmoore.dev>",
@@ -58,6 +58,9 @@
 		"@wordpress/element": "^6.46.0",
 		"@wordpress/hooks": "^4.46.0",
 		"@wordpress/i18n": "^6.19.0"
+	},
+	"overrides": {
+		"fsevents": "2.3.2"
 	},
 	"files": [
 		"dist",

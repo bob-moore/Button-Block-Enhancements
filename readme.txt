@@ -3,7 +3,7 @@ Contributors: Bob Moore
 Tags: block-editor, gutenberg, button, icons, blocks
 Requires at least: 6.9
 Tested up to: 7.0
-Stable tag: 1.1.1
+Stable tag: 1.2.1
 Requires PHP: 8.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Button Block Enhancements extends the core/button block with icon controls and h
 
 This plugin supersedes Enable Button Icons (https://github.com/bob-moore/enable-button-icons). All icon functionality has been migrated here and extended with additional enhancements.
 
-Under the hood, the plugin now boots through a single controller that builds a PHP-DI container, then delegates responsibilities to focused asset/icon providers, render transformers, and filesystem/URL resolver services.
+Under the hood, the plugin now boots through Main, which builds a PHP-DI container, then resolves a controller that delegates responsibilities to focused asset/icon providers, render transformers, and filesystem/URL resolver services.
 
 What it does:
 
@@ -58,13 +58,15 @@ This plugin is distributed through GitHub releases and includes a scoped updater
 
 `require_once __DIR__ . '/vendor/autoload.php';`
 
-3. Instantiate and mount the service:
+3. Instantiate and mount the package:
 
-`use Bmd\ButtonBlockEnhancements\Controller;`
-`$plugin = new Controller( $dependency_url, $dependency_path, false );`
+`use Bmd\ButtonBlockEnhancements\Main;`
+`$plugin = new Main( [ 'package' => 'your_plugin_slug', 'path' => $dependency_path, 'url' => $dependency_url ] );`
 `$plugin->mount();`
 
-The constructor expects the filesystem path and public URL pointing to the Button Block Enhancements dependency root, not the file where you call it. Leave the third argument `false` for Composer-embedded usage unless your project manages the compiled container cache lifecycle.
+The `path` and `url` values must point to the Button Block Enhancements dependency root, not the file where you call it. The `package` value is used for extension filters/actions so the package can inherit your parent plugin namespace when embedded. The package's own script and style handles remain fixed as `button-block-enhancements-*` to avoid collisions with the parent plugin's handles.
+
+You may omit `path` and `url` when WordPress can resolve the dependency location automatically, but passing them explicitly is safest for Composer-embedded plugins and themes. Container compilation is only enabled automatically when `environment` is `production` and a writable package cache is available.
 
 == Frequently Asked Questions ==
 
@@ -92,8 +94,14 @@ Yes. Button Block Enhancements supersedes Enable Button Icons and adds hover/foc
 
 = 1.2.1 =
 
-* Fixed bug that in Utilities that creates a malformed URL
-* Fixed bug that caused style and script handle collisions when included via composer.
+* Fixed a Utilities bug that created a malformed package URL in embedded contexts.
+* Fixed a bug that caused style and script handle collisions when included via Composer.
+* Updated Composer usage documentation to bootstrap through Main with array config.
+* Renamed render/content mutation classes from Processors to Transformers.
+* Moved PHPCS, PHPStan, and PHPUnit config to root-level files and added a combined Composer test script.
+* Added CSS and JavaScript lint GitHub workflows.
+* Committed npm lockfile policy and optional dependency config so CI installs include platform-optional packages such as fsevents.
+* Cleaned Composer export rules for root declaration files and removed the misspelled declerations.d.ts file.
 
 = 1.1.1 =
 
@@ -114,6 +122,10 @@ Yes. Button Block Enhancements supersedes Enable Button Icons and adds hover/foc
 * Added scoped GitHub updater.
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+
+No action required for standalone plugin users. Composer consumers should bootstrap with `Bmd\ButtonBlockEnhancements\Main` and array config instead of the old Controller constructor example.
 
 = 1.1.1 =
 

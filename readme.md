@@ -10,6 +10,8 @@
 [![Lint PHP](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpcs.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpcs.yml)
 [![PHPStan](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpstan.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpstan.yml)
 [![PHPUnit](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpunit.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/phpunit.yml)
+[![CSS Lint](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-css.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-css.yml)
+[![JS Lint](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-js.yml/badge.svg)](https://github.com/bob-moore/button-block-enhancements/actions/workflows/lint-js.yml)
 
 Want to give it a test drive? Try it in the WP Playground: [![Try it in the WordPress Playground](https://img.shields.io/badge/WP_Playground-v1.1.1-blue?logo=wordpress&logoColor=%23fff&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bob-moore/button-block-enhancements/main/_playground/blueprint-github.json)
 
@@ -21,10 +23,10 @@ Add icons and hover/focus colors to the WordPress Button block (`core/button`) i
 
 - Adds icon controls to `core/button` in the block inspector.
 - Supports icon libraries:
-  - WordPress icons
-  - MUI icons
-  - MUI variant families, including Outlined, Rounded, and Sharp
-  - Custom SVG input
+    - WordPress icons
+    - MUI icons
+    - MUI variant families, including Outlined, Rounded, and Sharp
+    - Custom SVG input
 - Lets you set icon position (left/right).
 - Lets you set icon size per button using CSS units (for example `1em`, `20px`, `1.25rem`).
 - Renders sanitized inline SVG on the frontend.
@@ -40,7 +42,7 @@ Add icons and hover/focus colors to the WordPress Button block (`core/button`) i
 
 ### Architecture
 
-- Boots through a single `Controller` that builds a small PHP-DI container and mounts all WordPress hooks.
+- Boots through `Main`, which builds a small PHP-DI container, then resolves `Controller` to mount all WordPress hooks.
 - Splits responsibilities into focused providers (`Assets`, `Icons`), transformers (`Colors`, `Icons`), and resolver services for file paths and URLs.
 - Scopes bundled runtime dependencies in release zips to avoid conflicts with other plugins.
 - Ships release zips with a compiled container cache, while Composer installs exclude `cache/` so host projects can decide whether to compile their own container.
@@ -67,29 +69,32 @@ If you are embedding this into your own project:
 composer require bmd/button-block-enhancements
 ```
 
-Then bootstrap:
+Then bootstrap from your plugin or theme:
 
 ```php
-use Bmd\ButtonBlockEnhancements\Controller;
+use Bmd\ButtonBlockEnhancements\Main;
 
 $dependency_url  = plugin_dir_url( __FILE__ ) . 'vendor/bmd/button-block-enhancements/';
 $dependency_path = plugin_dir_path( __FILE__ ) . 'vendor/bmd/button-block-enhancements/';
 
-
-$plugin = new Controller(
-    $dependency_url,
-    $dependency_path,
-    false
+$plugin = new Main(
+    [
+        'package' => 'your_plugin_slug',
+        'path'    => $dependency_path,
+        'url'     => $dependency_url,
+    ]
 );
 
 $plugin->mount();
 ```
 
-The constructor expects the public URL and filesystem path pointing to the Button Block Enhancements dependency root, not the file where you call it. The third argument enables PHP-DI container compilation; leave it `false` for Composer-embedded usage unless your project manages its own cache lifecycle.
+The `path` and `url` values must point to the Button Block Enhancements dependency root, not the file where you call it. The `package` value is used for extension filters/actions so the package can inherit your parent plugin namespace when embedded. The package's own script and style handles remain fixed as `button-block-enhancements-*` to avoid collisions with the parent plugin's handles.
+
+You may omit `path` and `url` when WordPress can resolve the dependency location automatically, but passing them explicitly is safest for Composer-embedded plugins and themes. Container compilation is only enabled automatically when `environment` is `production` and a writable package cache is available.
 
 ## Usage
 
-### Icons
+### Using Icons
 
 1. Add a Button block.
 2. Open the block sidebar.
@@ -99,7 +104,7 @@ The constructor expects the public URL and filesystem path pointing to the Butto
 6. Open the **Icon Styles** panel to set icon size and position (left/right).
 7. Save and view the post.
 
-### Hover/Focus Colors
+### Using Hover/Focus Colors
 
 1. Add a Button block.
 2. Open the block sidebar.
@@ -137,8 +142,14 @@ add_filter( 'button_block_enhancements_icon_families', function ( $families ) {
 
 ### 1.2.1
 
-- Fixed bug that in Utilities that creates a malformed URL
-- Fixed bug that caused style and script handle collisions when included via composer.
+- Fixed a malformed package URL generated by `Utilities` in embedded contexts.
+- Fixed style and script handle collisions when the package is included via Composer by hardcoding package-owned asset handles.
+- Updated Composer usage documentation to bootstrap through `Main` with array config.
+- Renamed render/content mutation classes from `Processors` to `Transformers`.
+- Moved PHPCS, PHPStan, and PHPUnit config to root-level files and added a combined Composer `test` script.
+- Added CSS and JavaScript lint GitHub workflows.
+- Committed npm lockfile policy and optional dependency config so CI installs include platform-optional packages such as `fsevents`.
+- Cleaned Composer export rules for root declaration files and removed the misspelled `declerations.d.ts`.
 
 ### 1.1.1
 
