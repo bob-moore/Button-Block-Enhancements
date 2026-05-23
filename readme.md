@@ -135,6 +135,11 @@ add_filter( 'button_block_enhancements_icon_families', function ( $families ) {
 
 ## Changelog
 
+### 1.2.1
+
+- Fixed bug that in Utilities that creates a malformed URL
+- Fixed bug that caused style and script handle collisions when included via composer.
+
 ### 1.1.1
 
 - Documented the controller/provider/processor architecture used by the current plugin bootstrap.

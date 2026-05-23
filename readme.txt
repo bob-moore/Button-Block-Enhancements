@@ -90,6 +90,11 @@ Yes. Button Block Enhancements supersedes Enable Button Icons and adds hover/foc
 
 == Changelog ==
 
+= 1.2.1 =
+
+* Fixed bug that in Utilities that creates a malformed URL
+* Fixed bug that caused style and script handle collisions when included via composer.
+
 = 1.1.1 =
 
 * Standardized release metadata and package versions on 1.1.1.
