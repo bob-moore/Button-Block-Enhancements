@@ -59,9 +59,6 @@
 		"@wordpress/hooks": "^4.46.0",
 		"@wordpress/i18n": "^6.19.0"
 	},
-	"overrides": {
-		"fsevents": "2.3.2"
-	},
 	"files": [
 		"dist",
 		"includes",
