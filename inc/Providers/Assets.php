@@ -18,6 +18,10 @@ use Bmd\ButtonBlockEnhancements\Services;
  */
 class Assets extends Module
 {
+	protected const EDITOR_SCRIPT_HANDLE = 'button-block-enhancements-editor';
+	protected const EDITOR_STYLE_HANDLE  = 'button-block-enhancements-editor-styles';
+	protected const BLOCK_STYLE_HANDLE   = 'button-block-enhancements-styles';
+
 	/**
 	 * Constructor.
 	 *
@@ -38,12 +42,12 @@ class Assets extends Module
 	public function enqueueEditorAssets(): void
 	{
 		$this->script_loader->enqueue(
-			handle: "{$this->package}-editor",
+			handle: self::EDITOR_SCRIPT_HANDLE,
 			src: 'build/editor.js'
 		);
 
 		wp_add_inline_script(
-			"{$this->package}-editor",
+			self::EDITOR_SCRIPT_HANDLE,
 			'window.buttonBlockEnhancements = ' . wp_json_encode(
 				[
 					'iconFamilies' => apply_filters( "{$this->package}_icon_families", [] ),
@@ -53,7 +57,7 @@ class Assets extends Module
 		);
 
 		$this->style_loader->enqueue(
-			handle: "{$this->package}-editor-styles",
+			handle: self::EDITOR_STYLE_HANDLE,
 			src: 'build/editor.css'
 		);
 	}
@@ -67,7 +71,7 @@ class Assets extends Module
 	{
 		$this->style_loader->enqueueBlockStyle(
 			block_name: 'core/button',
-			handle: "{$this->package}-styles",
+			handle: self::BLOCK_STYLE_HANDLE,
 			src: 'build/styles.css',
 		);
 	}

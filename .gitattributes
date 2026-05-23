@@ -9,8 +9,8 @@
 .prettierignore      export-ignore
 .vscode/             export-ignore
 .wp-env.json         export-ignore
-cache/              export-ignore
-declarations.d.ts   export-ignore
+cache/               export-ignore
+/*.d.ts              export-ignore
 MEMORY.md            export-ignore
 memory/              export-ignore
 package.json         export-ignore

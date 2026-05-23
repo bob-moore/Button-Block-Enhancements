@@ -6,7 +6,7 @@
             ],
             "settings": {
                 "phpcs.enable": true,
-                "phpcs.standard": "./tests/phpcs.xml",
+                "phpcs.standard": "./phpcs.xml",
                 "phpcs.executablePath": "./vendor/bin/phpcs",
                 "phpcs.showWarnings": true,
                 "phpcs.showSources": true,

@@ -22,11 +22,11 @@ class StyleLoader extends AssetLoader
 	 * Register a stylesheet, auto-resolving version from the companion
 	 * .asset.php when the source is a local file.
 	 *
-	 * @param string           $handle       Style handle.
-	 * @param string           $src          Relative path or full URL.
+	 * @param string            $handle       Style handle.
+	 * @param string            $src          Relative path or full URL.
 	 * @param array<int,string> $dependencies Style dependencies.
-	 * @param string           $version      Version override.
-	 * @param string           $screens      Media query / screen target.
+	 * @param string            $version      Version override.
+	 * @param string            $screens      Media query / screen target.
 	 *
 	 * @return bool
 	 */
@@ -64,11 +64,11 @@ class StyleLoader extends AssetLoader
 	/**
 	 * Register and enqueue a stylesheet.
 	 *
-	 * @param string           $handle       Style handle.
-	 * @param string           $src          Relative path or full URL.
+	 * @param string            $handle       Style handle.
+	 * @param string            $src          Relative path or full URL.
 	 * @param array<int,string> $dependencies Style dependencies.
-	 * @param string           $version      Version override.
-	 * @param string           $screens      Media query / screen target.
+	 * @param string            $version      Version override.
+	 * @param string            $screens      Media query / screen target.
 	 *
 	 * @return bool
 	 */
@@ -95,9 +95,9 @@ class StyleLoader extends AssetLoader
 	 *
 	 * Skips silently when the file does not exist or is empty.
 	 *
-	 * @param string           $block_name   Fully-qualified block name (e.g. 'core/button').
-	 * @param string           $handle       Style handle.
-	 * @param string           $src          Relative path to the stylesheet.
+	 * @param string            $block_name   Fully-qualified block name (e.g. 'core/button').
+	 * @param string            $handle       Style handle.
+	 * @param string            $src          Relative path to the stylesheet.
 	 * @param array<int,string> $dependencies Style dependencies.
 	 *
 	 * @return void

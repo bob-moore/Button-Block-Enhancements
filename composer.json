@@ -25,7 +25,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Bmd\\ButtonBlockEnhancements\\PHPUnit\\": "tests/phpunit"
+            "Bmd\\ButtonBlockEnhancements\\PHPUnit\\": "phpunit"
         }
     },
     "require": {
@@ -45,15 +45,20 @@
     },
     "scripts": {
         "build-release": "node scripts/build-plugin-release.mjs",
-        "phpstan": "./vendor/bin/phpstan analyze -c ./tests/phpstan.neon --memory-limit=2048M",
-        "phpsniff": "./vendor/bin/phpcs ./inc -v --standard='./tests/phpcs.xml'",
-        "phpsniff:fix": "./vendor/bin/phpcbf ./inc -v --standard='./tests/phpcs.xml'",
+        "phpstan": "./vendor/bin/phpstan analyze -c ./phpstan.neon --memory-limit=2048M",
+        "phpsniff": "./vendor/bin/phpcs ./inc -v --standard='./phpcs.xml'",
+        "phpsniff:fix": "./vendor/bin/phpcbf ./inc -v --standard='./phpcs.xml'",
         "phpsniff:default": "./vendor/bin/phpcs ./inc -v",
         "phpsniff:PSR12": "./vendor/bin/phpcs ./inc -v --standard='PSR12'",
         "phpsniff:PSR2": "./vendor/bin/phpcs ./inc -v --standard='PSR2'",
         "phpsniff:WP": "./vendor/bin/phpcs ./inc -v --standard='WordPress'",
-        "phpunit": "./vendor/bin/phpunit --configuration ./tests/phpunit.xml --verbose",
-        "zip": "zip -r button-block-enhancements.zip"
+        "phpunit": "./vendor/bin/phpunit --configuration ./phpunit.xml --verbose",
+        "zip": "zip -r button-block-enhancements.zip",
+        "test": [
+            "@phpsniff",
+            "@phpstan",
+            "@phpunit"
+        ]
     },
     "extra": {
         "plugin-release": {
